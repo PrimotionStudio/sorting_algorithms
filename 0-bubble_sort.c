@@ -1,5 +1,11 @@
 #include "sort.h"
 
+/**
+ * bubble_sort - A fucntion that uses bubble sorting algo
+ * to so an array in ascending order
+ * @array: the array to be sorted
+ * @size: The size or leght of the array
+ */
 void bubble_sort(int *array, size_t size)
 {
 	int i, j, tmp;
