@@ -22,9 +22,12 @@ void selection_sort(int *array, size_t size)
 					continue;
 			}
 		}
-		tmp = array[i];
-		array[i] = mn;
-		array[mni] = tmp;
-		print_array(array, size);
+		if (array[i] != mn && i != mni)
+		{
+			tmp = array[i];
+			array[i] = mn;
+			array[mni] = tmp;
+			print_array(array, size);
+		}
 	}
 }
