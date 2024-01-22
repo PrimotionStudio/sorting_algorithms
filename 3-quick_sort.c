@@ -1,6 +1,19 @@
 #include "sort.h"
 
 /**
+ * count - counts the number of element in an array
+ * @n: the array to count
+ */
+int count(int *n)
+{
+	int i = 0;
+
+	while (n[i] != 0)
+		i++;
+	return (i - 1);
+}
+
+/**
  * partition - is used to swap and return the pivot of the array
  * @n: the array
  * @start: the startindex of the array
@@ -10,9 +23,9 @@
 int partition(int *n, int start, int end)
 {
 	int pivot = n[end];
-	int i = start - 1, tmp;
+	int i = start - 1, tmp, j;
 
-	for (int j = start; j <= end - 1; j++)
+	for (j = start; j <= end - 1; j++)
 	{
 		if (n[j] < pivot)
 		{
@@ -26,7 +39,7 @@ int partition(int *n, int start, int end)
 	tmp = n[i];
 	n[i] = n[end];
 	n[end] = tmp;
-
+	print_array(n, count(n));
 	return (i);
 }
 
@@ -38,9 +51,11 @@ int partition(int *n, int start, int end)
  */
 void quick(int *n, int start, int end)
 {
+	int pivot;
+
 	if (end <= start)
 		return;
-	int pivot = partition(n, start, end);
+	pivot = partition(n, start, end);
 	quick(n, start, pivot - 1);
 	quick(n, pivot + 1, end);
 }
