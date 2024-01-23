@@ -1,14 +1,26 @@
 #include "sort.h"
 
 /**
+ * count - counts the number of element in an array
+ * @n: the array to count
+ */
+int count(int *n)
+{
+	int i = 0;
+
+	while (n[i] != 0)
+		i++;
+	return (i - 1);
+}
+
+/**
  * partition - is used to swap and return the pivot of the array
  * @n: the array
  * @start: the startindex of the array
  * @end: the end index of the array
- * @size: The size of the array
  * Return: Returns the pivot index of the array
  */
-int partition(int *n, int start, int end, size_t size)
+int partition(int *n, int start, int end)
 {
 	int pivot = n[end];
 	int i = start - 1, tmp, j;
@@ -27,7 +39,7 @@ int partition(int *n, int start, int end, size_t size)
 	tmp = n[i];
 	n[i] = n[end];
 	n[end] = tmp;
-	print_array(n, size);
+	print_array(n, count(n));
 	return (i);
 }
 
@@ -36,17 +48,16 @@ int partition(int *n, int start, int end, size_t size)
  * @n: the array
  * @start: the startindex of the array
  * @end: the end index of the array
- * @size: The size of the array
  */
-void quick(int *n, int start, int end, size_t size)
+void quick(int *n, int start, int end)
 {
 	int pivot;
 
 	if (end <= start)
 		return;
-	pivot = partition(n, start, end, size);
-	quick(n, start, pivot - 1, size);
-	quick(n, pivot + 1, end, size);
+	pivot = partition(n, start, end);
+	quick(n, start, pivot - 1);
+	quick(n, pivot + 1, end);
 }
 
 /**
@@ -57,7 +68,5 @@ void quick(int *n, int start, int end, size_t size)
  */
 void quick_sort(int *array, size_t size)
 {
-	if (array == NULL || size < 2)
-		return;
-	quick(array, 0, size - 1, size);
+	quick(array, 0, size - 1);
 }
